@@ -33,14 +33,14 @@ gapminder %>%
 5. Try `sum()` again without `na.rm = TRUE`.
 
 ```{r}
-x <- c(3, 5, NA, 2,  NA)
-sum(x)
-sum(x, na.rm = TRUE)
+x <- _____________
+___(x)
+___(x, ___)
 
-x_missing <- is.na(x)
+x_missing <- _______
 x_missing
 
-x[x_missing] <- 0
+_________ <- 0
 sum(x)
 ```
 
@@ -54,15 +54,15 @@ sum(x)
 6. Call `sim_data()`
 
 ```{r}
-sim_data <- function() {
+______ ___ ______() {
   tibble(
-    x = rnorm(50),
-    sex = rep(c("male", "female"), times = 25),
-    age = sample(25:50, size = 50, replace = TRUE)
+    x = ______(50),
+    sex = ______(___, times = ___),
+    age = ______(___, size = 50, replace = TRUE)
   )
 }
 
-sim_data()
+_________
 ```
 
 ## Your Turn 3: Bonus!
@@ -83,11 +83,9 @@ Did you finish early? Try this extra exercise
 2. Call `evalue()` for a risk ratio of 3.9
 
 ```{r}
-evalue <- function(estimate) {
-  estimate + sqrt(estimate * (estimate - 1))
-}
 
-evalue(3.9)
+
+evalue(___)
 ```
 
 # Your Turn 5
@@ -98,8 +96,8 @@ evalue(3.9)
 
 ```{r}
 evalue <- function(estimate) { 
-  if (!is.numeric(estimate)) stop("`estimate` must be numeric")
-  if (estimate < 1) estimate <- 1 / estimate
+  if (_________) stop("`estimate` must be numeric")
+  if (_________) _________ <- _________
   estimate + sqrt(estimate * (estimate - 1))
 }
 
@@ -115,9 +113,9 @@ evalue("3.9")
 3. Call `evalue()` for a risk ratio of 3.9. Then try it again with `type = "or"`.
 
 ```{r}
-evalue <- function(estimate, type = "rr") {
+evalue <- function(estimate, _______) {
   if (!is.numeric(estimate)) stop("`estimate` must be numeric")
-  if (type == "or") estimate <- sqrt(estimate)
+  if (_______) _______ <- _______
   if (estimate < 1) estimate <- 1 / estimate
   estimate + sqrt(estimate * (estimate - 1))
 }
@@ -139,21 +137,15 @@ evalue(3.9, type = "or")
 7. Transform `estimate` using `transform_to_rr()`. Don't forget to pass it both `estimate` and `type`!
 
 ```{r}
-transform_to_rr <- function(estimate, type) {
-  if (type == "or") estimate <- sqrt(estimate)
-  if (type == "hr") estimate <- (1 - 0.5^sqrt(estimate)) / (1 - 0.5^sqrt(1 / estimate))
-  if (estimate < 1) estimate <- 1 / estimate
-  
-  estimate
-}
+
 
 evalue <- function(estimate, type = c("rr", "or", "hr")) {
   # validate arguments
   if (!is.numeric(estimate)) stop("`estimate` must be numeric")
-  type <- match.arg(type)
+  ____ <- ___________
 
   # calculate evalue
-  estimate <- transform_to_rr(estimate, type)
+  estimate <- __________
   estimate + sqrt(estimate * (estimate - 1))
 }
 
@@ -172,14 +164,14 @@ evalue(3.9, type = "rd")
 4. Try `filter_summarize()` again for 2002, but also filter countries that have "and" in the country name. Use `str_detect()` from the stringr package.
 
 ```{r}
-filter_summarize <- function(...) {
+filter_summarize <- function(___) {
   gapminder %>% 
-    filter(...) %>% 
-    summarize(n = n(), mean_lifeExp = mean(lifeExp))
+    filter(___) %>% 
+    summarize(n = ___, mean_lifeExp = ________)
 }
 
-filter_summarize(year == 1952)
-filter_summarize(year == 2002, str_detect(country, " and "))
+filter_summarize(_______)
+filter_summarize(_______, _______(country, " and "))
 ```
 
 
